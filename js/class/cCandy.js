@@ -5,7 +5,7 @@ var Candy = function(row,column,type){
     this.img = new Image();
     this.img.src = "img/candy/"+this.type+".png";
     this.x = column * 100 + 40;
-    this.y = 0;
+    this.y = 3*100;
     this.speed = 0;
     this.aceleration = 4;
     console.log(this.row+"//"+this.column);
@@ -41,7 +41,7 @@ function clickCandies(){ // esta función nos servirá para cuando hagamos click
         if(event.pageX > 40 && event.pageX < 1040 && event.pageY > 10+3*100 && event.pageY < 1910-5*100){
             candies.push(new Candy( 19 - Math.floor( ( event.pageY -10 ) / 100 ) , Math.floor( (event.pageX -40) / 100 ) , Math.ceil(Math.random() * 8 ) ) )
         }
-    })
+    });
 }
 
 function spawnCandies(row,column){
