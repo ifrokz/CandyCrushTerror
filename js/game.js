@@ -3,6 +3,7 @@ var timer = "";
 var leftPriority = true;
 
 $(document).ready(function(){
+    clearData();
     prepareCanvas();
     prepareLevelCanvas(1);
     timer = setTimeout("start()",1000);

@@ -13,6 +13,10 @@ function drawGrid(){
     for(var i = 40; i < 1080; i += 100){
             ctx.moveTo(i,10+100*3);
             ctx.lineTo(i,1910-100*5);
+            ctx.moveTo(i-1,10+100*3);
+            ctx.lineTo(i-1,1910-100*5);
+            ctx.moveTo(i+1,10+100*3);
+            ctx.lineTo(i+1,1910-100*5);
     }
     ctx.closePath();
     ctx.stroke();
