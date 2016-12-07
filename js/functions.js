@@ -6,17 +6,13 @@ function prepareCanvas(){
 // DIBUJA EL TABLERO (AUXILIAR EN DESARROLLO)
 function drawGrid(){
     ctx.beginPath();
-    for(var i = 10; i < 1920; i += 100){
+    for(var i = 10+100*3; i < 1920-100*5; i += 100){
         ctx.moveTo(40,i);
         ctx.lineTo(1040,i);
     }
     for(var i = 40; i < 1080; i += 100){
-            ctx.moveTo(i,10);
-            ctx.lineTo(i,1910);
-            ctx.moveTo(i-1,10);
-            ctx.lineTo(i-1,1910);
-            ctx.moveTo(i+1,10);
-            ctx.lineTo(i+1,1910);
+            ctx.moveTo(i,10+100*3);
+            ctx.lineTo(i,1910-100*5);
     }
     ctx.closePath();
     ctx.stroke();
