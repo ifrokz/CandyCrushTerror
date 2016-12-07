@@ -1,0 +1,39 @@
+6/12/16 - [Jose]
+
+    - Implementado lectura de imagen src: niveles/1.png de 10x19px- ejecutalo con el xampp.
+
+    - class candy definida:
+        en class candy hay una función temporal auxiliar clickCandies(); ejecutada antes del bucle. Cuando enciendas el juego prueba a hacer click en el canvas y verás enseguida qué es lo que hace.
+        Nos servirá más adelante para relacionar el pageX y pageY del click con el objeto sobre el que hemos hecho click (buscando fila y columna en el sql).
+
+    - spawnCandies(row,column) sin definir aún. Mi idea es que en inicio() se llame a la lectura de level.png, y por cada pixel negro haga un spawnCandies(filadelpixel, columnadelpixel).
+        Y luego cada vez que rompamos un caramelo llamemos a la función spawnCandies() tras la reordenación de los caramelos.
+
+    - Candy.prototype.update() está hecho de modo que si en sql cambiamos la columna que le toca al caramelo, este descienda hasta su nueva posición. 
+        De momento solo está implementado el movimiento vertical.
+
+    - Class tile definida (para colocar las casillas del tablero):
+        Aún sin métodos.
+
+    - He puesto una función drawGrid() que dibuja la malla. Es auxiliar para el desarrollo. Más adelante ya la podemos mutear si así lo preferimos todos.
+
+    - He decidido hacer el juego para 1080x1920 de modo que hay 19 filas y 10 columnas de 100 px cada casilla. Margen izq y derecho de 40px, Margen superior e inferior de 10px.
+        Como no vamos a hacer 19x10 casillas porque no cabría la interfaz,  hay que decidir cuantas filas eliminamos (arriba y abajo) para dejar un margen superior para interfaz superior y/o otro inferior 
+        para la interfaz inferior. Una vez que lo cambiemos debemos cambiar también los niveles.png que ya no deben de ser de 19x10px.
+
+        <!-- Mañana (miércoles 07) trabajo de 10:00 a 16:00, por si no contesto al whatsapp. -->
+    
+7/12/16 - [Ivan]
+
+    ////////////////////////
+    // DISEÑO DEL NIVELES //
+    ////////////////////////
+    - Caramelos máximo 10x10:
+        · teniendo en cuenta que en la parte superior hay una barra del alto de un caramelo para poner el objetivo del nivel y utilizar cosas especiales, ya son 11 de alto.
+        · en la parte inferior hay una HUD del alto de 3 caramelos (11+1+3 total 15 de alto):
+            1- Botones de silenciar sonido, salir, reiniciar etc. (1 de alto)
+            2- Movimientos restantes / Puntos (2 de alto)
+    - Los espacios restantes no tienen nada, se ve el fondo de pantalla como en el original (2 de alto arriba y 2 de alto abajo = 19 total)
+    
+    He hecho una imágen de píxeles en formato de Gimp que está en la carpeta niveles, para que veas cómo queda
+    la disatribución de espacio (niveles/DISEÑO NIVELES.xcf). 

@@ -1,0 +1,10 @@
+body,html{
+    margin: auto;
+}
+#canvas{
+    border:1px solid black;
+    background: rgba(150,0,255,0.5);
+}
+.level{
+    border:1px solid black;
+}
