@@ -37,3 +37,8 @@
     
     He hecho una imágen de píxeles en formato de Gimp que está en la carpeta niveles, para que veas cómo queda
     la disatribución de espacio (niveles/DISEÑO NIVELES.xcf). 
+
+    - Se crea una rejilla de  10x10 al empezar. 
+    
+    - Ahora los caramelos tienen otra estructura de filas/columnas, empezando por la fila 0 y la columna 0 al estar 
+        en la primera casilla de arriba a la izquerda, y la 9/9 en la inferior derecha. (Creo que así se facilita mucho)
