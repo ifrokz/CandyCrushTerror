@@ -37,11 +37,35 @@ function updateCandies(){
     }
 }
 
+var selectedCandy = 0;
+var selectedCandyUp = 0;
+var selectedCandyDown = 0;
+var selectedCandyLeft = 0;
+var selectedCandyRight = 0;
 function clickCandies(){ // esta función nos servirá para cuando hagamos click en un caramelo, pillar su row y su column y filtrar en la base de datos para seleccionar ese caramelo
-    $("#canvas").click(function(event){ // de momento genera caramelos donde haces click
+    $("#canvas").mousedown(function(event){ // de momento genera caramelos donde haces click
         console.log(event.pageX + " | " + event.pageY);
         if(event.pageX > 40 && event.pageX < 1040 && event.pageY > 10 + 3 * 100 && event.pageY < 1910 - 5 * 100){
             console.log(Math.floor( ( event.pageY - 10 ) / 100 ) - 3+"//"+ Math.floor( ( event.pageX - 40 ) / 100));
+            var tempRow =Math.floor( ( event.pageY - 10 ) / 100 ) - 3; //fila donde has hecho click
+            var tempColumn =Math.floor( ( event.pageX - 40 ) / 100);   //columna donde has hecho click
+            for (var c in candies){
+                if(candies[c].row == tempRow && candies[c].column == tempColumn){ // caramelo seleccionado
+                    selectedCandy = c;
+                }
+                if(candies[c].row == tempRow-1 && candies[c].column == tempColumn){ // caramelo seleccionado arriba
+                    selectedCandyUp = c;
+                }
+                if(candies[c].row == tempRow+1 && candies[c].column == tempColumn){ // caramelo seleccionado abajo
+                    selectedCandyDown = c;
+                }
+                if(candies[c].row == tempRow && candies[c].column == tempColumn - 1){ // caramelo seleccionado izquierda
+                    selectedCandyLeft = c;
+                }
+                if(candies[c].row == tempRow && candies[c].column == tempColumn + 1){ // caramelo seleccionado derecha
+                    selectedCandyRight = c;
+                }
+            }
             //candies.push( new Candy(Math.floor( ( event.pageY - 10 ) / 100 ) - 3, Math.floor( ( event.pageX - 40 ) / 100), Math.ceil( Math.random() * 8 ) , candyCount ) );
             //addCandyToDatabase(candies[candies.length-1].row,candies[candies.length-1].column,candyCount);
             //candyCount++;
@@ -51,6 +75,32 @@ function clickCandies(){ // esta función nos servirá para cuando hagamos click
     $("#canvas").swipe( {
         swipe: function (event, direction, distance, duration, fingerCount, fingerData) {
             console.log(direction);
+            switch(direction){
+                case "left":
+                    candies[selectedCandy].column -= 1;
+                    candies[selectedCandyLeft].column += 1;
+                    candies[selectedCandy].x -= 100;
+                    candies[selectedCandyLeft].x += 100;
+                    break;
+                case "right":
+                    candies[selectedCandy].column += 1;
+                    candies[selectedCandyRight].column -= 1;
+                    candies[selectedCandy].x += 100;
+                    candies[selectedCandyRight].x -= 100;
+                    break;
+                case "up":
+                    candies[selectedCandy].row -= 1;
+                    candies[selectedCandyUp].row += 1;
+                    candies[selectedCandy].y -= 100;
+                    candies[selectedCandyUp].y += 100;
+                    break;
+                case "down":
+                    candies[selectedCandy].row += 1;
+                    candies[selectedCandyDown].row -= 1;
+                    candies[selectedCandy].y += 100;
+                    candies[selectedCandyDown].y -= 100;
+                    break;
+            }
         },
         threshold:0
     });
