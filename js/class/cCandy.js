@@ -1,7 +1,9 @@
-var Candy = function(row,column,type){
+candyCount = 1;
+var Candy = function(row,column,type,id){
     this.row = row;
     this.column = column;
     this.type = type;
+    this.id = id;
     this.img = new Image();
     this.img.src = "img/candy/"+this.type+".png";
     this.x = column * 100 + 40;
@@ -57,13 +59,18 @@ function clickCandies(){ // esta función nos servirá para cuando hagamos click
     $("#canvas").click(function(event){ // de momento genera caramelos donde haces click
         console.log(event.pageX + " | " + event.pageY);
         if(event.pageX > 40 && event.pageX < 1040 && event.pageY > 10 + 3 * 100 && event.pageY < 1910 - 5 * 100){
-            candies.push( new Candy(Math.floor( ( event.pageY - 10 ) / 100 ) - 3, Math.floor( ( event.pageX - 40 ) / 100), Math.ceil( Math.random() * 8 ) ) );
-            addCandyToDatabase(candies[candies.length-1].row,candies[candies.length-1].column);
+             candies.push( new Candy(Math.floor( ( event.pageY - 10 ) / 100 ) - 3, Math.floor( ( event.pageX - 40 ) / 100), Math.ceil( Math.random() * 8 ) ) );
+             addCandyToDatabase(candies[candies.length-1].row,candies[candies.length-1].column);
         }
     });
 }
 
 function spawnCandies(row,column){
-
+    candies.push(new Candy(row, column, Math.ceil( Math.random() * 8 ), candyCount ) );
+    addCandyToDatabase(row, column, candyCount);
+    candyCount++;
 }
 
+function removeCandies(row,column){
+    removeCandyFromDatabase(row,column);
+}

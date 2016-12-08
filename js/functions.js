@@ -28,7 +28,7 @@ function drawGrid(){
 ////////////////////////
 
 function prepareLevelCanvas(level){
-    $("body").append('<canvas class=level id=levelCanvas width=10px height=19px></canvas>');
+    $("body").append('<canvas class=level id=levelCanvas width=10px height=11px></canvas>');
     levelCanvas = document.getElementById("levelCanvas");
     levelCtx = levelCanvas.getContext("2d");
     levelImage = new Image();
@@ -40,13 +40,14 @@ function drawLevelCanvas(){
 }
 
 function scanLevelCanvas(){
-    pixels = levelCtx.getImageData(0,0,10,19);
+    pixels = levelCtx.getImageData(0,0,10,11);
     pixelsArray = pixels.data;
     for(var i = 0; i < pixelsArray.length; i += 4){
         if(pixelsArray[i] < 10 && 
         pixelsArray[i + 1] < 10 &&
         pixelsArray[i + 2] < 10 ){ // si el pixel es negro
             // casilla donde puede haber un caramelo
+            spawnCandies( ( Math.floor( ( i / 4 ) / 10 ) ) , ( i / 4 % 10 ) );
         }
         if(pixelsArray[i] > 240 && 
         pixelsArray[i + 1] < 10 &&
@@ -58,8 +59,8 @@ function scanLevelCanvas(){
         pixelsArray[i + 2] < 10 ){ // si el pixel es verde
             // casilla transparente atravesable por caramelos pero no se quedan en ellas
         }
-        // document.write(pixelsArray[i]+"-"+pixelsArray[i+1]+"-"+pixelsArray[i+2]+"-"+pixelsArray[i+3]+"<br>");
-        // console.log ( "pixel " + i / 4 + ": fila: " + ( Math.floor( ( i / 4 ) / 10 ) + 1 ) +", columna: "+ ( i / 4 % 10 + 1 ) );
+         //document.write(pixelsArray[i]+"-"+pixelsArray[i+1]+"-"+pixelsArray[i+2]+"-"+pixelsArray[i+3]+"<br>");
+         //console.log ( "pixel " + i / 4 + ": fila: " + ( Math.floor( ( i / 4 ) / 10 ) ) +", columna: "+ ( i / 4 % 10 ) );
     }
 }
 
