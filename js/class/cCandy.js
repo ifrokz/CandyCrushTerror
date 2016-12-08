@@ -14,6 +14,7 @@ var Candy = function(row,column,type,id){
 
 
     this.update = function(){ // de momento implementado solamente que caigan pabajo
+        // POS Y
         if(this.y < this.row * 100 + 100 * 3 + 10){
             this.speed += this.aceleration;
             this.y += this.speed;
@@ -21,6 +22,8 @@ var Candy = function(row,column,type,id){
             this.speed = 0;
             this.y = this.row * 100 + 100 * 3 + 10;
         }
+
+        
     }
 
     this.render = function(){
