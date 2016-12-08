@@ -111,23 +111,7 @@ function clickCandies(){ // esta función nos servirá para cuando hagamos click
             console.log(Math.floor( ( event.pageY - 10 ) / 100 ) - 3+"//"+ Math.floor( ( event.pageX - 40 ) / 100));
             var tempRow =Math.floor( ( event.pageY - 10 ) / 100 ) - 3; //fila donde has hecho click
             var tempColumn =Math.floor( ( event.pageX - 40 ) / 100);   //columna donde has hecho click
-            for (var c in candies){
-                if(candies[c].row == tempRow && candies[c].column == tempColumn){ // caramelo seleccionado
-                    selectedCandy = c;
-                }
-                if(candies[c].row == tempRow-1 && candies[c].column == tempColumn){ // caramelo seleccionado arriba
-                    selectedCandyUp = c;
-                }
-                if(candies[c].row == tempRow+1 && candies[c].column == tempColumn){ // caramelo seleccionado abajo
-                    selectedCandyDown = c;
-                }
-                if(candies[c].row == tempRow && candies[c].column == tempColumn - 1){ // caramelo seleccionado izquierda
-                    selectedCandyLeft = c;
-                }
-                if(candies[c].row == tempRow && candies[c].column == tempColumn + 1){ // caramelo seleccionado derecha
-                    selectedCandyRight = c;
-                }
-            }
+            selectCandy(tempRow,tempColumn);
             //candies.push( new Candy(Math.floor( ( event.pageY - 10 ) / 100 ) - 3, Math.floor( ( event.pageX - 40 ) / 100), Math.ceil( Math.random() * 8 ) , candyCount ) );
             //addCandyToDatabase(candies[candies.length-1].row,candies[candies.length-1].column,candyCount);
             //candyCount++;
@@ -140,7 +124,7 @@ function clickCandies(){ // esta función nos servirá para cuando hagamos click
             switch(direction){
                 case "left":
                     if(selectedCandyLeft == ""){}else{
-                     candies[selectedCandy].column -= 1;
+                        candies[selectedCandy].column -= 1;
                         candies[selectedCandyLeft].column += 1;
                     }
 
@@ -169,7 +153,7 @@ function clickCandies(){ // esta función nos servirá para cuando hagamos click
             selectedCandyDown = "";
             selectedCandyLeft = "";
             selectedCandyRight = "";
-            console.log(selectedCandyLeft)
+            //console.log(selectedCandyLeft)
         },
         threshold:0
     });
@@ -185,4 +169,32 @@ function spawnCandies(row,column){
 
 function removeCandies(row,column){
     removeCandyFromDatabase(row,column);
+}
+
+function checkVertical(){
+
+}
+
+function checkHorizontal(){
+
+}
+
+function selectCandy(selectedRow,selectedColumn){
+    for (var c in candies){
+        if(candies[c].row == selectedRow && candies[c].column == selectedColumn){ // caramelo seleccionado
+            selectedCandy = c;
+        }
+        if(candies[c].row == selectedRow-1 && candies[c].column == selectedColumn){ // caramelo seleccionado arriba
+            selectedCandyUp = c;
+        }
+        if(candies[c].row == selectedRow+1 && candies[c].column == selectedColumn){ // caramelo seleccionado abajo
+            selectedCandyDown = c;
+        }
+        if(candies[c].row == selectedRow && candies[c].column == selectedColumn - 1){ // caramelo seleccionado izquierda
+            selectedCandyLeft = c;
+        }
+        if(candies[c].row == selectedRow && candies[c].column == selectedColumn + 1){ // caramelo seleccionado derecha
+            selectedCandyRight = c;
+        }
+    }
 }
