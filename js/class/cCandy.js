@@ -21,14 +21,6 @@ var Candy = function(row,column,type,id){
             this.speed = 0;
             this.y = this.row * 100 + 100 * 3 + 10;
         }
-        // ESTA ES LA FUNCIÓN ANTIGUA DE JOSE
-        /*if( (10 + this.y ) < (1910 + this.row * 100) ){
-            this.speed += this.aceleration;
-            this.y += this.speed;
-        }else{
-            this.speed = 0;
-            this.y = 1910 - this.row *100;
-        }*/
     }
 
     this.render = function(){
@@ -44,16 +36,6 @@ function updateCandies(){
         candies[c].render();
     }
 }
-
-// ESTA ES LA FUNCIÓN ANTIGUA DE JOSE
-/*function clickCandies(){ // esta función nos servirá para cuando hagamos click en un caramelo, pillar su row y su column y filtrar en la base de datos para seleccionar ese caramelo
-    $("#canvas").click(function(event){ // de momento genera caramelos donde haces click
-        console.log(event.pageX + " | " + event.pageY);
-        if(event.pageX > 40 && event.pageX < 1040 && event.pageY > 10+3*100 && event.pageY < 1910-5*100){
-            candies.push(new Candy( 19 - Math.floor( ( event.pageY -10 ) / 100 ) , Math.floor( (event.pageX -40) / 100 ) , Math.ceil(Math.random() * 8 ) ) )
-        }
-    });
-}*/
 
 function clickCandies(){ // esta función nos servirá para cuando hagamos click en un caramelo, pillar su row y su column y filtrar en la base de datos para seleccionar ese caramelo
     $("#canvas").click(function(event){ // de momento genera caramelos donde haces click
