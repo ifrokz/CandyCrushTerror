@@ -30,7 +30,7 @@ function selectCandyFromDatabase(rowToSelect, columnToSelect){ // asigna a selec
                 for(var i = 0; i < rs.rows.length; i++){
                     var tempRow = rs.rows.item(i);
                     resultSelect.push( parseInt(tempRow['id']) );
-                    return(resultSelect[0]);
+                    console.log(resultSelect[i]);
                 }
         });
     });

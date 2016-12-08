@@ -59,8 +59,9 @@ function clickCandies(){ // esta función nos servirá para cuando hagamos click
     $("#canvas").click(function(event){ // de momento genera caramelos donde haces click
         console.log(event.pageX + " | " + event.pageY);
         if(event.pageX > 40 && event.pageX < 1040 && event.pageY > 10 + 3 * 100 && event.pageY < 1910 - 5 * 100){
-             candies.push( new Candy(Math.floor( ( event.pageY - 10 ) / 100 ) - 3, Math.floor( ( event.pageX - 40 ) / 100), Math.ceil( Math.random() * 8 ) ) );
-             addCandyToDatabase(candies[candies.length-1].row,candies[candies.length-1].column);
+            candies.push( new Candy(Math.floor( ( event.pageY - 10 ) / 100 ) - 3, Math.floor( ( event.pageX - 40 ) / 100), Math.ceil( Math.random() * 8 ) , candyCount ) );
+            addCandyToDatabase(candies[candies.length-1].row,candies[candies.length-1].column,candyCount);
+            candyCount++;
         }
     });
 }
