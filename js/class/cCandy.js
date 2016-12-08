@@ -10,12 +10,13 @@ var Candy = function(row,column,type,id){
     this.y = 3*100;
     this.speedX = 0;
     this.speedY = 0;
-    this.aceleration = 4;
+    this.aceleration = 1;
     console.log(this.row+"//"+this.column);
 
 
     this.update = function(){ // de momento implementado solamente que caigan pabajo
         // POS Y
+        /*
         if(this.y < this.row * 100 + 100 * 3 + 10){
             this.speedX += this.aceleration;
             this.y += this.speedX;
@@ -24,7 +25,7 @@ var Candy = function(row,column,type,id){
             this.y = this.row * 100 + 100 * 3 + 10;
         }
 
-        if(this.x/100+40 > this.column){
+        if((this.x-40)/100+40 > this.column){
             if(this.x < this.column * 100 + 40){
                 this.speedY += this.aceleration;
                 this.x += this.speedY;
@@ -32,16 +33,54 @@ var Candy = function(row,column,type,id){
                 this.speedY = 0;
                 this.x = this.column * 100 + 40;
             } 
-        }
-        
-        if(this.x/100+40 < this.column){
-            if(this.x > this.column * 100 + 40){
+        }else{
+           if(this.x > this.column * 100 + 40){
                 this.speedY += this.aceleration;
                 this.x -= this.speedY;
             }else{
                 this.speedY = 0;
                 this.x = this.column * 100 + 40;
-            } 
+            }
+        }
+ 
+        if((this.x-40)/100+40 < this.column){
+ 
+        }*/
+
+
+        
+        //POS Y
+        if(this.y < this.row*100+10+100*3){
+            this.speedY += this.aceleration;
+            this.y += this.speedY;
+            if(this.y > this.row*100+10+100*3){
+                this.y = this.row*100+10+100*3;
+                this.speedY = 0;
+            }
+        }else{
+            this.speedY += this.aceleration;
+            this.y -= this.speedY;
+            if(this.y < this.row*100+10+100*3){
+                this.y = this.row*100+10+100*3;
+                this.speedY = 0;
+            }
+        }
+
+        // POS X
+        if(this.x < this.column*100+40){
+            this.speedX+=this.aceleration;
+            this.x+=this.speedX;
+            if(this.x > this.column*100+40){
+                this.x = this.column*100+40
+                this.speedX = 0;
+            }
+        }else{
+            this.speedX+=this.aceleration;
+            this.x-=this.speedX;
+            if(this.x < this.column*100+40){
+                this.x = this.column*100+40
+                this.speedX = 0;
+            }   
         }
 
     }
