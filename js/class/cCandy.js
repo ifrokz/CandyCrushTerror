@@ -32,7 +32,7 @@ var Candy = function(row,column,type,id){
     }
 
     this.render = function(){
-        ctx.drawImage(this.img, this.x, this.y);
+        ctx.drawImage(this.img, this.x+10, this.y+10,80,80);
     }
 }
 
@@ -77,7 +77,7 @@ function clickCandies(){ // esta función nos servirá para cuando hagamos click
 
 
 function spawnCandies(row,column){
-    candies.push(new Candy(row, column, Math.ceil( Math.random() * 8 ), candyCount ) );
+    candies.push(new Candy(row, column, Math.ceil( Math.random() * 6 ), candyCount ) );
     addCandyToDatabase(row, column, candyCount);
     candyCount++;
 }
