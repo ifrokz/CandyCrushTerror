@@ -31,6 +31,7 @@ function selectCandyFromDatabase(rowToSelect, columnToSelect){ // asigna a selec
                     var tempRow = rs.rows.item(i);
                     resultSelect.push( parseInt(tempRow['id']) );
                     console.log(resultSelect[i]);
+                    return(resultSelect[i]);
                 }
         });
     });

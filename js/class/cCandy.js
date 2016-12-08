@@ -100,10 +100,10 @@ function updateCandies(){
 }
 
 var selectedCandy = 0;
-var selectedCandyUp = "a";
-var selectedCandyDown = "a";
-var selectedCandyLeft = "a";
-var selectedCandyRight = "a";
+var selectedCandyUp = "";
+var selectedCandyDown = "";
+var selectedCandyLeft = "";
+var selectedCandyRight = "";
 function clickCandies(){ // esta función nos servirá para cuando hagamos click en un caramelo, pillar su row y su column y filtrar en la base de datos para seleccionar ese caramelo
     $("#canvas").mousedown(function(event){ // de momento genera caramelos donde haces click
         console.log(event.pageX + " | " + event.pageY);
