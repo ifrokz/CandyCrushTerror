@@ -171,30 +171,62 @@ function removeCandies(row,column){
     removeCandyFromDatabase(row,column);
 }
 
-function checkVertical(){
 
+function checkCandies(){
+    for (var i = 0; i < candies.length; i++){
+        selectCandy(candies[i].row,candies[i].column);
+    }
 }
 
-function checkHorizontal(){
-
+function checkUp(){
+    if(candies[selectedCandy].type == candies[selectedCandyUp].type){
+        return(true);
+    }else{
+        return(false);
+    }
+}
+function checkDown(){
+    if(candies[selectedCandy].type == candies[selectedCandyDown].type){
+        return(true);
+    }else{
+        return(false);
+    }
+}
+function checkLeft(){
+    if(candies[selectedCandy].type == candies[selectedCandyLeft].type){
+        return(true);
+    }else{
+        return(false);
+    }
+}
+function checkRight(){
+    if(candies[selectedCandy].type == candies[selectedCandyRight].type){
+        return(true);
+    }else{
+        return(false);
+    }
 }
 
 function selectCandy(selectedRow,selectedColumn){
     for (var c in candies){
-        if(candies[c].row == selectedRow && candies[c].column == selectedColumn){ // caramelo seleccionado
-            selectedCandy = c;
+        if(candies[c].row == selectedRow){
+            if (candies[c].column == selectedColumn){ // caramelo seleccionado
+                selectedCandy = c;
+            }
+            if (candies[c].column == selectedColumn - 1){ // caramelo seleccionado izquierda
+                selectedCandyLeft = c;
+            }
+            if(candies[c].column == selectedColumn + 1){ // caramelo seleccionado derecha
+                selectedCandyRight = c;
+            } 
         }
-        if(candies[c].row == selectedRow-1 && candies[c].column == selectedColumn){ // caramelo seleccionado arriba
-            selectedCandyUp = c;
-        }
-        if(candies[c].row == selectedRow+1 && candies[c].column == selectedColumn){ // caramelo seleccionado abajo
-            selectedCandyDown = c;
-        }
-        if(candies[c].row == selectedRow && candies[c].column == selectedColumn - 1){ // caramelo seleccionado izquierda
-            selectedCandyLeft = c;
-        }
-        if(candies[c].row == selectedRow && candies[c].column == selectedColumn + 1){ // caramelo seleccionado derecha
-            selectedCandyRight = c;
-        }
+        if(candies[c].column == selectedColumn){ // caramelo seleccionado arriba
+            if(candies[c].row == selectedRow-1){
+                selectedCandyUp = c;
+            }
+            if(candies[c].row == selectedRow+1){
+                selectedCandyDown = c;
+            } 
+        }  
     }
 }
