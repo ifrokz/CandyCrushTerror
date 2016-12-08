@@ -8,7 +8,8 @@ var Candy = function(row,column,type,id){
     this.img.src = "img/candy/"+this.type+".png";
     this.x = column * 100 + 40;
     this.y = 3*100;
-    this.speed = 0;
+    this.speedX = 0;
+    this.speedY = 0;
     this.aceleration = 4;
     console.log(this.row+"//"+this.column);
 
@@ -16,14 +17,33 @@ var Candy = function(row,column,type,id){
     this.update = function(){ // de momento implementado solamente que caigan pabajo
         // POS Y
         if(this.y < this.row * 100 + 100 * 3 + 10){
-            this.speed += this.aceleration;
-            this.y += this.speed;
+            this.speedX += this.aceleration;
+            this.y += this.speedX;
         }else{
-            this.speed = 0;
+            this.speedX = 0;
             this.y = this.row * 100 + 100 * 3 + 10;
         }
 
+        if(this.x/100+40 > this.column){
+            if(this.x < this.column * 100 + 40){
+                this.speedY += this.aceleration;
+                this.x += this.speedY;
+            }else{
+                this.speedY = 0;
+                this.x = this.column * 100 + 40;
+            } 
+        }
         
+        if(this.x/100+40 < this.column){
+            if(this.x > this.column * 100 + 40){
+                this.speedY += this.aceleration;
+                this.x -= this.speedY;
+            }else{
+                this.speedY = 0;
+                this.x = this.column * 100 + 40;
+            } 
+        }
+
     }
 
     this.render = function(){
@@ -82,26 +102,26 @@ function clickCandies(){ // esta función nos servirá para cuando hagamos click
                 case "left":
                     candies[selectedCandy].column -= 1;
                     candies[selectedCandyLeft].column += 1;
-                    candies[selectedCandy].x -= 100;
-                    candies[selectedCandyLeft].x += 100;
+                    //candies[selectedCandy].x -= 100;
+                   // candies[selectedCandyLeft].x += 100;
                     break;
                 case "right":
                     candies[selectedCandy].column += 1;
                     candies[selectedCandyRight].column -= 1;
-                    candies[selectedCandy].x += 100;
-                    candies[selectedCandyRight].x -= 100;
+                  //  candies[selectedCandy].x += 100;
+                //    candies[selectedCandyRight].x -= 100;
                     break;
                 case "up":
                     candies[selectedCandy].row -= 1;
                     candies[selectedCandyUp].row += 1;
-                    candies[selectedCandy].y -= 100;
-                    candies[selectedCandyUp].y += 100;
+               //     candies[selectedCandy].y -= 100;
+                 //   candies[selectedCandyUp].y += 100;
                     break;
                 case "down":
                     candies[selectedCandy].row += 1;
                     candies[selectedCandyDown].row -= 1;
-                    candies[selectedCandy].y += 100;
-                    candies[selectedCandyDown].y -= 100;
+                 //   candies[selectedCandy].y += 100;
+                 //   candies[selectedCandyDown].y -= 100;
                     break;
             }
         },
