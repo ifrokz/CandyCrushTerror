@@ -100,10 +100,10 @@ function updateCandies(){
 }
 
 var selectedCandy = 0;
-var selectedCandyUp = 0;
-var selectedCandyDown = 0;
-var selectedCandyLeft = 0;
-var selectedCandyRight = 0;
+var selectedCandyUp = "a";
+var selectedCandyDown = "a";
+var selectedCandyLeft = "a";
+var selectedCandyRight = "a";
 function clickCandies(){ // esta función nos servirá para cuando hagamos click en un caramelo, pillar su row y su column y filtrar en la base de datos para seleccionar ese caramelo
     $("#canvas").mousedown(function(event){ // de momento genera caramelos donde haces click
         console.log(event.pageX + " | " + event.pageY);
@@ -139,30 +139,37 @@ function clickCandies(){ // esta función nos servirá para cuando hagamos click
             console.log(direction);
             switch(direction){
                 case "left":
-                    candies[selectedCandy].column -= 1;
-                    candies[selectedCandyLeft].column += 1;
-                    //candies[selectedCandy].x -= 100;
-                   // candies[selectedCandyLeft].x += 100;
+                    if(selectedCandyLeft == ""){}else{
+                     candies[selectedCandy].column -= 1;
+                        candies[selectedCandyLeft].column += 1;
+                    }
+
                     break;
                 case "right":
-                    candies[selectedCandy].column += 1;
-                    candies[selectedCandyRight].column -= 1;
-                  //  candies[selectedCandy].x += 100;
-                //    candies[selectedCandyRight].x -= 100;
+                    if(selectedCandyRight == ""){}else{
+                        candies[selectedCandy].column += 1;
+                        candies[selectedCandyRight].column -= 1;
+                    }
+
                     break;
                 case "up":
-                    candies[selectedCandy].row -= 1;
-                    candies[selectedCandyUp].row += 1;
-               //     candies[selectedCandy].y -= 100;
-                 //   candies[selectedCandyUp].y += 100;
+                    if(selectedCandyUp == ""){}else{
+                        candies[selectedCandy].row -= 1;
+                        candies[selectedCandyUp].row += 1;
+                    }
                     break;
                 case "down":
-                    candies[selectedCandy].row += 1;
-                    candies[selectedCandyDown].row -= 1;
-                 //   candies[selectedCandy].y += 100;
-                 //   candies[selectedCandyDown].y -= 100;
+                    if(selectedCandyDown == ""){}else{
+                        candies[selectedCandy].row += 1;
+                        candies[selectedCandyDown].row -= 1;
+                    }
                     break;
             }
+            selectedCandyUp = "";
+            selectedCandyDown = "";
+            selectedCandyLeft = "";
+            selectedCandyRight = "";
+            console.log(selectedCandyLeft)
         },
         threshold:0
     });
