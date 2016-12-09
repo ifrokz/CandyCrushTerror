@@ -88,3 +88,11 @@ function reScanLevelCanvas(){
     }
     hideLevelCanvas();
 }
+
+
+//// HUD ////
+function drawHUD(){
+    $("#hud").html("");
+    $("#hud").html("Puntos: "+points+" | Movimientos: "+moves+" ");
+}
+

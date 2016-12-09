@@ -58,6 +58,8 @@
 09/12/2016 - [Ivan]
 
 - Cambio de 30 a  60 fps (queda mucho mas fuido)
-- Ahora aparece el tipo de caramelo especial que toca.
 - Precarga de todas las imágenes para optimizar el juego.
 - Creada la casilla de spawn de caramelos. (bug porque no se jutarla con el código)
+
+// DESHECHO: 
+- Ahora aparece el tipo de caramelo especial que toca.

@@ -154,6 +154,7 @@ function clickCandies(){ // esta función nos servirá para cuando hagamos click
                 clickCandyLeft = "";
                 clickCandyRight = "";
                 //console.log(selectedCandyLeft)
+                moves--;
             }
         },
         threshold:0
@@ -286,7 +287,7 @@ function checkCandies(){
                     candyCount++;
                 }
                 if (sameHorizontal == 5){
-                    candies.push(new Candy(candies[clickCandy].row,candies[clickCandy].column,candies[clickCandy].type+30,candyCount));
+                    candies.push(new Candy(candies[clickCandy].row,candies[clickCandy].column,40,candyCount));
                     candyCount++;
                 }
             }else{
@@ -295,7 +296,7 @@ function checkCandies(){
                     candyCount++;
                 }
                 if (sameHorizontal == 5){
-                    candies.push(new Candy(candies[selectedCandy].row,candies[selectedCandy].column,candies[selectedCandy].type+30,candyCount));
+                    candies.push(new Candy(candies[selectedCandy].row,candies[selectedCandy].column,40,candyCount));
                     candyCount++;
                 }
             }
@@ -303,6 +304,7 @@ function checkCandies(){
     }
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 function checkUp(removeCandy){
     for (var i = 0; i < 10; i++){
         if(selectedCandyUp[i] != ""){
@@ -388,13 +390,14 @@ function selectCandy(selectedRow,selectedColumn){
             }
         }  
     }
+           
     /*console.log("selectedCandy = "+selectedCandy );
     console.log("selectedCandyUp = " + selectedCandyUp);
     console.log("selectedCandyDown = "+ selectedCandyDown);
     console.log("selectedCandyLeft = "+ selectedCandyLeft );
     console.log("selectedCandyRight = "+selectedCandyRight); */
 }
-
 function sortCandies(){
-    
+
 }
+

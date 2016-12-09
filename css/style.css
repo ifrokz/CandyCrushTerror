@@ -8,3 +8,11 @@ body,html{
 .level{
     border:1px solid black;
 }
+
+#hud{
+    top: 50px;
+    left: 100px;
+    font-size: 50px;
+    position: absolute;
+    margin: 0 auto;
+}

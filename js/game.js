@@ -24,8 +24,9 @@ function start(){
 
 function loop(){
     ctx.clearRect(0,0,1080,1920);
+    drawHUD();
     drawGrid();
-    updateTiles();
+    //updateTiles();
     updateCandies();
     sortCandies();
     if(leftPriority){

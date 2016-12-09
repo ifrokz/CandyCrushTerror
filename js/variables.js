@@ -1,6 +1,8 @@
+
+var points = 0;
+var moves = 50;
+
 var candyImg = [];
-
-
 // Caramelo normal
 for(var i = 1;i<=6;i++){
     candyImg[i]= new Image();
