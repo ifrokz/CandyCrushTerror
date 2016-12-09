@@ -222,6 +222,7 @@ function checkCandies(){
                     }
                 }
                 candies.splice(c,1);
+                firstClick = false;
                 cannotMove = false;
             }
         }
