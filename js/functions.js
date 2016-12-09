@@ -82,6 +82,7 @@ function reScanLevelCanvas(){
             selectCandy(Math.floor( ( i / 4 ) / 10 ),( i / 4 % 10 ));
             if(selectedCandy == ""){
                 candies.push(new Candy(Math.floor( ( i / 4 ) / 10 ),( i / 4 % 10 ),Math.ceil(Math.random()*6),candyCount));
+                candyCount++;
             }
         }
     }
