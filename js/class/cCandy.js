@@ -12,6 +12,8 @@ var Candy = function(row,column,type,id){
     this.speedY = 0;
     this.aceleration = 1;
     this.remove = false;
+    this.width = 80;
+    this.height = 80;
     //console.log(this.row+"//"+this.column);
 
 
@@ -87,7 +89,7 @@ var Candy = function(row,column,type,id){
     }
 
     this.render = function(){
-        ctx.drawImage(this.img, this.x+10, this.y+10,80,80);
+        ctx.drawImage(this.img, this.x+10-this.width/2+40, this.y+10-this.height/2+40,this.width,this.height);
     }
 }
 
@@ -202,7 +204,11 @@ function removeCandies(row,column){
 function checkCandies(){
     for (var c in candies){
         if(candies[c].remove == true){
-            candies.splice(c,1);
+            candies[c].width -= 3;
+            candies[c].height -= 3;
+            if(candies[c].width < 10){
+                candies.splice(c,1);
+            }
         }
     }
     for (var i = 0; i < candies.length; i++){ // busca L o T
