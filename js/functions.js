@@ -76,12 +76,14 @@ function reScanLevelCanvas(){
         if(pixelsArray[i] < 10 && 
         pixelsArray[i + 1] < 10 &&
         pixelsArray[i + 2] < 10 ){ // si el pixel es negro
-            // casilla donde puede haber un caramelo
             //fila: Math.floor( ( i / 4 ) / 10 )
             //columna: ( i / 4 % 10 )
             //¿existe candy[fila,columna]?, si no existe haz un push
-             
+            selectCandy(Math.floor( ( i / 4 ) / 10 ),( i / 4 % 10 ));
+            if(selectedCandy == ""){
+                candies.push(new Candy(Math.floor( ( i / 4 ) / 10 ),( i / 4 % 10 ),Math.ceil(Math.random()*6),candyCount));
+            }
         }
     }
-    HideLevelCanvas();
+    hideLevelCanvas();
 }

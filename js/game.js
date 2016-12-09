@@ -4,6 +4,7 @@ var leftPriority = true;
 var firstClick = false;
 var candiesSorted = false;
 var frame = 0;
+var cannotMove = false;
 
 $(document).ready(function(){
     clearData();
@@ -31,7 +32,7 @@ function loop(){
         checkCandies();
     }
     if(!leftPriority){
-        //reScanLevelCanvas();
+        reScanLevelCanvas();
     }
     frame++;
     leftPriority = !leftPriority; // si leftPriority=true, caida en diagonal izquierda primero, si leftPriority=false, caida en diagonal derecha primero

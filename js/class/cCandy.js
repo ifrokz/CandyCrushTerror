@@ -102,7 +102,7 @@ function updateCandies(){
     }
 }
 
-var selectedCandy = 0;
+var selectedCandy = "";
 var selectedCandyUp = ["","","","","","","","","",""];
 var selectedCandyDown = ["","","",""];
 var selectedCandyLeft = ["","","",""];
@@ -210,8 +210,8 @@ function checkCandies(){
     for (var c in candies){
         if(candies[c].remove == true){
             cannotMove = true;
-            candies[c].width -= 3;
-            candies[c].height -= 3;
+            candies[c].width -= 5;
+            candies[c].height -= 5;
             if(candies[c].width < 10){
                 selectCandy(candies[c].row,candies[c].column);
                 for (var s in selectedCandyUp){
@@ -384,7 +384,7 @@ function checkRight(removeCandy){
 }
 
 function selectCandy(selectedRow,selectedColumn){
-    selectedCandy = 0;
+    selectedCandy = "";
     selectedQuantity = 0;
     selectedCandyUp = ["","","",""];
     selectedCandyDown = ["","","",""];
