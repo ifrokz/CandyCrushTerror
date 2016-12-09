@@ -11,6 +11,7 @@ var Candy = function(row,column,type,id){
     this.speedX = 0;
     this.speedY = 0;
     this.aceleration = 1;
+    this.remove = false;
     //console.log(this.row+"//"+this.column);
 
 
@@ -199,6 +200,11 @@ function removeCandies(row,column){
 
 
 function checkCandies(){
+    for (var c in candies){
+        if(candies[c].remove == true){
+            candies.splice(c,1);
+        }
+    }
     for (var i = 0; i < candies.length; i++){ // busca L o T
         sameVertical = 1;
         sameHorizontal = 1;
@@ -218,7 +224,7 @@ function checkCandies(){
             checkRight(removeCandy);
             removeCandy = false;
             for(var c in candiesToRemove){
-                candies.splice(candiesToRemove[c],1);
+                candies[candiesToRemove[c]].remove = true;
             }
             candiesToRemove=[];
             return;
@@ -241,7 +247,7 @@ function checkCandies(){
             checkDown(removeCandy);
             removeCandy = false;
             for(var c in candiesToRemove){
-                candies.splice(candiesToRemove[c],1);
+                candies[candiesToRemove[c]].remove = true;
             }
             candiesToRemove=[];
             return;
@@ -253,8 +259,9 @@ function checkCandies(){
             checkLeft(removeCandy);
             checkRight(removeCandy);
             removeCandy = false;
+            console.log("borrame:"+candiesToRemove)
             for(var c in candiesToRemove){
-                candies.splice(candiesToRemove[c],1);
+                candies[candiesToRemove[c]].remove = true;
             }
             candiesToRemove=[];
         }
@@ -286,10 +293,10 @@ function checkDown(removeCandy){
 function checkLeft(removeCandy){
     for (var i = 0; i < 3; i++){
         if(selectedCandyLeft[i] != ""){
-            if(removeCandy){console.log("en el frame:"+frame+", vale:"+selectedCandyLeft[i])}
+            //if(removeCandy){console.log("en el frame:"+frame+", vale:"+selectedCandyLeft[i])}
             if(candies[selectedCandy].type == candies[selectedCandyLeft[i]].type){
                 if(removeCandy){
-                    console.log("en el frame:"+frame+", vale:"+selectedCandyLeft[i])
+                    //console.log("en el frame:"+frame+", vale:"+selectedCandyLeft[i])
                     candiesToRemove.push(selectedCandyLeft[i]);
                 }else{sameHorizontal++;}
             }else{return}
