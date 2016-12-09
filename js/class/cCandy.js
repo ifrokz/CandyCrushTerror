@@ -18,39 +18,6 @@ var Candy = function(row,column,type,id){
 
 
     this.update = function(){ // de momento implementado solamente que caigan pabajo
-        // POS Y
-        /*
-        if(this.y < this.row * 100 + 100 * 3 + 10){
-            this.speedX += this.aceleration;
-            this.y += this.speedX;
-        }else{
-            this.speedX = 0;
-            this.y = this.row * 100 + 100 * 3 + 10;
-        }
-
-        if((this.x-40)/100+40 > this.column){
-            if(this.x < this.column * 100 + 40){
-                this.speedY += this.aceleration;
-                this.x += this.speedY;
-            }else{
-                this.speedY = 0;
-                this.x = this.column * 100 + 40;
-            } 
-        }else{
-           if(this.x > this.column * 100 + 40){
-                this.speedY += this.aceleration;
-                this.x -= this.speedY;
-            }else{
-                this.speedY = 0;
-                this.x = this.column * 100 + 40;
-            }
-        }
- 
-        if((this.x-40)/100+40 < this.column){
- 
-        }*/
-
-
         
         //POS Y
         if(this.y < this.row*100+10+100*3){
@@ -251,10 +218,10 @@ function checkCandies(){
             }
             candiesToRemove=[];
             if(firstClick){
-                candies.push(new Candy(candies[clickCandy].row,candies[clickCandy].column,40,candyCount));
+                candies.push(new Candy(candies[clickCandy].row,candies[clickCandy].column,candies[selectedCandy].type+30,candyCount));
                 candyCount++;
             }else{
-                candies.push(new Candy(candies[selectedCandy].row,candies[selectedCandy].column,40,candyCount));
+                candies.push(new Candy(candies[selectedCandy].row,candies[selectedCandy].column,candies[selectedCandy].type+30,candyCount));
                 candyCount++;
             }
             return;
@@ -286,7 +253,7 @@ function checkCandies(){
                     candyCount++;
                 }
                 if (sameVertical == 5){
-                    candies.push(new Candy(candies[clickCandy].row,candies[clickCandy].column,candies[clickCandy].type+30,candyCount));
+                    candies.push(new Candy(candies[clickCandy].row,candies[clickCandy].column,40,candyCount));
                     candyCount++;
                 }
             }else{
@@ -295,7 +262,7 @@ function checkCandies(){
                     candyCount++;
                 }
                 if (sameVertical == 5){
-                    candies.push(new Candy(candies[selectedCandy].row,candies[selectedCandy].column,candies[selectedCandy].type+30,candyCount));
+                    candies.push(new Candy(candies[selectedCandy].row,candies[selectedCandy].column,40,candyCount));
                     candyCount++;
                 }
             }

@@ -1,4 +1,4 @@
-var fps = 30;
+var fps = 60;
 var timer = "";
 var leftPriority = true;
 var firstClick = false;
@@ -10,7 +10,7 @@ $(document).ready(function(){
     clearData();
     prepareCanvas();
     prepareLevelCanvas(1);
-    timer = setTimeout("start()",1000);
+    timer = setTimeout("start()",100);
 });
 
 function start(){
@@ -19,7 +19,7 @@ function start(){
     hideLevelCanvas();
     clickCandies(); // de momento para testear comportamiento
     clearTimeout(timer);
-    timer = setTimeout("loop()",1000);
+    timer = setTimeout("loop()",900);
 }
 
 function loop(){
