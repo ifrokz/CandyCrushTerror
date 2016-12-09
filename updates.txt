@@ -54,3 +54,10 @@
 -como durante la animación el caramelo aún existe, se impide hacer movimientos hasta que esta finalice. De este modo se evita que los caramelos se monten unos encima de otros
 -he separado operaciones a realizar en el los frame pares y en los frame impares para aumentar el rendimiento tal y como me has sugerido antes. 
 -Vamos a dejar para el final el impedir movimientos que no hacen grupos (ya que poder mover libremente los caramelos viene muy bien para testear las funciones)
+
+09/12/2016 - [Ivan]
+
+- Cambio de 30 a  60 fps (queda mucho mas fuido)
+- Ahora aparece el tipo de caramelo especial que toca.
+- Precarga de todas las imágenes para optimizar el juego.
+- Creada la casilla de spawn de caramelos. (bug porque no se jutarla con el código)

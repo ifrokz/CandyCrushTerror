@@ -4,8 +4,8 @@ var Candy = function(row,column,type,id){
     this.column = column;
     this.type = type;
     this.id = id;
-    this.img = new Image();
-    this.img.src = "img/candy/"+this.type+".png";
+    /*this.img = new Image();
+    this.img.src = "img/candy/"+this.type+".png"; */
     this.x = column * 100 + 40;
     this.y = 3*100;
     this.speedX = 0;
@@ -56,7 +56,7 @@ var Candy = function(row,column,type,id){
     }
 
     this.render = function(){
-        ctx.drawImage(this.img, this.x+10-this.width/2+40, this.y+10-this.height/2+40,this.width,this.height);
+        ctx.drawImage(candyImg[this.type], this.x+10-this.width/2+40, this.y+10-this.height/2+40,this.width,this.height);
     }
 }
 
