@@ -23,6 +23,7 @@ function loop(){
     drawGrid();
     updateTiles();
     updateCandies();
+    checkCandies();
     leftPriority = !leftPriority; // si leftPriority=true, caida en diagonal izquierda primero, si leftPriority=false, caida en diagonal derecha primero
     clearTimeout(timer);
     timer = setTimeout("loop()",1000/fps);
