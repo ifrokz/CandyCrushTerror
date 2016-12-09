@@ -299,7 +299,6 @@ function checkCandies(){
                     candyCount++;
                 }
             }
-            
         }
     }
 }
