@@ -42,3 +42,15 @@
     
     - Ahora los caramelos tienen otra estructura de filas/columnas, empezando por la fila 0 y la columna 0 al estar 
         en la primera casilla de arriba a la izquerda, y la 9/9 en la inferior derecha. (Creo que así se facilita mucho)
+
+09/12/2016 - [jose]
+
+-Detección de tríos, cuartetos, quintetos, L y T.
+-Al detectar un tipo de agrupamiento, elimina los caramelos y si procede añade un caramelo especial.
+-El caramelo especial aparece donde toca
+-Los caramelos bajan correctamente al desaparecer caramelos
+-Aparecen nuevos caramelos correctamente
+-Añadida animación al eleminar los caramelos
+-como durante la animación el caramelo aún existe, se impide hacer movimientos hasta que esta finalice. De este modo se evita que los caramelos se monten unos encima de otros
+-he separado operaciones a realizar en el los frame pares y en los frame impares para aumentar el rendimiento tal y como me has sugerido antes. 
+-Vamos a dejar para el final el impedir movimientos que no hacen grupos (ya que poder mover libremente los caramelos viene muy bien para testear las funciones)
