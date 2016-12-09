@@ -1,4 +1,6 @@
-candyCount = 1;
+var candyCount = 1;
+var candies = [];
+
 var Candy = function(row,column,type,id){
     this.row = row;
     this.column = column;
@@ -59,8 +61,6 @@ var Candy = function(row,column,type,id){
         ctx.drawImage(candyImg[this.type], this.x+10-this.width/2+40, this.y+10-this.height/2+40,this.width,this.height);
     }
 }
-
-var candies = [];
 
 function updateCandies(){
     for (var c in candies){
