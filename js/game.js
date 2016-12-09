@@ -27,7 +27,12 @@ function loop(){
     updateTiles();
     updateCandies();
     sortCandies();
-    checkCandies();
+    if(leftPriority){
+        checkCandies();
+    }
+    if(!leftPriority){
+        //reScanLevelCanvas();
+    }
     frame++;
     leftPriority = !leftPriority; // si leftPriority=true, caida en diagonal izquierda primero, si leftPriority=false, caida en diagonal derecha primero
     clearTimeout(timer);

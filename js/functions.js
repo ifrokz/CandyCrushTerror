@@ -67,3 +67,21 @@ function scanLevelCanvas(){
 function hideLevelCanvas(){
     $(".level").hide();
 }
+function showLevelCanvas(){
+    $(".level").show();
+}
+function reScanLevelCanvas(){
+    showLevelCanvas();
+    for(var i = 0; i < pixelsArray.length; i += 4){
+        if(pixelsArray[i] < 10 && 
+        pixelsArray[i + 1] < 10 &&
+        pixelsArray[i + 2] < 10 ){ // si el pixel es negro
+            // casilla donde puede haber un caramelo
+            //fila: Math.floor( ( i / 4 ) / 10 )
+            //columna: ( i / 4 % 10 )
+            //¿existe candy[fila,columna]?, si no existe haz un push
+             
+        }
+    }
+    HideLevelCanvas();
+}
