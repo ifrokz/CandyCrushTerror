@@ -200,7 +200,7 @@ function removeCandies(row,column){
     removeCandyFromDatabase(row,column);
 }
 
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function checkCandies(){
     for (var c in candies){
         if(candies[c].remove == true){
@@ -233,6 +233,8 @@ function checkCandies(){
                 candies[candiesToRemove[c]].remove = true;
             }
             candiesToRemove=[];
+            candies.push(new Candy(candies[clickCandy].row,candies[clickCandy].column,40,candyCount));
+            candyCount++;
             return;
         }
     }
@@ -256,6 +258,10 @@ function checkCandies(){
                 candies[candiesToRemove[c]].remove = true;
             }
             candiesToRemove=[];
+            if (sameVertical >= 4){
+                candies.push(new Candy(candies[clickCandy].row,candies[clickCandy].column,candies[clickCandy].type+10,candyCount));
+                candyCount++;
+            }
             return;
         }
         if(sameHorizontal >= 3){ // tenemos combinación horizontal
@@ -270,10 +276,14 @@ function checkCandies(){
                 candies[candiesToRemove[c]].remove = true;
             }
             candiesToRemove=[];
+            if (sameHorizontal >= 4){
+                candies.push(new Candy(candies[clickCandy].row,candies[clickCandy].column,candies[clickCandy].type+20,candyCount));
+                candyCount++;
+            }
         }
     }
 }
-
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function checkUp(removeCandy){
     for (var i = 0; i < 3; i++){
         if(selectedCandyUp[i] != ""){
