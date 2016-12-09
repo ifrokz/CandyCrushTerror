@@ -103,10 +103,10 @@ function updateCandies(){
 }
 
 var selectedCandy = 0;
-var selectedCandyUp = ["","",""];
-var selectedCandyDown = ["","",""];
-var selectedCandyLeft = ["","",""];
-var selectedCandyRight = ["","",""];
+var selectedCandyUp = ["","","",""];
+var selectedCandyDown = ["","","",""];
+var selectedCandyLeft = ["","","",""];
+var selectedCandyRight = ["","","",""];
 var clickCandy = 0;
 var clickCandyUp = "";
 var clickCandyDown = "";
@@ -115,6 +115,7 @@ var clickCandyRight = "";
 var candiesToRemove = [];
 function clickCandies(){ // esta función nos servirá para cuando hagamos click en un caramelo, pillar su row y su column y filtrar en la base de datos para seleccionar ese caramelo
     $("#canvas").mousedown(function(event){ // de momento genera caramelos donde haces click
+        firstClick = true;
         //console.log("pageX:"+event.pageX + " | pageY:" + event.pageY);
         if(event.pageX > 40 && event.pageX < 1040 && event.pageY > 10 + 3 * 100 && event.pageY < 1910 - 5 * 100){
             //console.log("fila:" + (Math.floor( ( event.pageY - 10 ) / 100 ) - 3)+"//columna:"+ Math.floor( ( event.pageX - 40 ) / 100));
@@ -233,8 +234,13 @@ function checkCandies(){
                 candies[candiesToRemove[c]].remove = true;
             }
             candiesToRemove=[];
-            candies.push(new Candy(candies[clickCandy].row,candies[clickCandy].column,40,candyCount));
-            candyCount++;
+            if(firstClick){
+                candies.push(new Candy(candies[clickCandy].row,candies[clickCandy].column,40,candyCount));
+                candyCount++;
+            }else{
+                candies.push(new Candy(candies[selectedCandy].row,candies[selectedCandy].column,40,candyCount));
+                candyCount++;
+            }
             return;
         }
     }
@@ -258,9 +264,24 @@ function checkCandies(){
                 candies[candiesToRemove[c]].remove = true;
             }
             candiesToRemove=[];
-            if (sameVertical >= 4){
-                candies.push(new Candy(candies[clickCandy].row,candies[clickCandy].column,candies[clickCandy].type+10,candyCount));
-                candyCount++;
+            if (firstClick){
+                if (sameVertical == 4){
+                    candies.push(new Candy(candies[clickCandy].row,candies[clickCandy].column,candies[clickCandy].type+10,candyCount));
+                    candyCount++;
+                }
+                if (sameVertical == 5){
+                    candies.push(new Candy(candies[clickCandy].row,candies[clickCandy].column,candies[clickCandy].type+30,candyCount));
+                    candyCount++;
+                }
+            }else{
+                if (sameVertical == 4){
+                    candies.push(new Candy(candies[selectedCandy].row,candies[selectedCandy].column,candies[selectedCandy].type+10,candyCount));
+                    candyCount++;
+                }
+                if (sameVertical == 5){
+                    candies.push(new Candy(candies[selectedCandy].row,candies[selectedCandy].column,candies[selectedCandy].type+30,candyCount));
+                    candyCount++;
+                }
             }
             return;
         }
@@ -276,16 +297,32 @@ function checkCandies(){
                 candies[candiesToRemove[c]].remove = true;
             }
             candiesToRemove=[];
-            if (sameHorizontal >= 4){
-                candies.push(new Candy(candies[clickCandy].row,candies[clickCandy].column,candies[clickCandy].type+20,candyCount));
-                candyCount++;
+            if(firstClick){
+                if (sameHorizontal == 4){
+                    candies.push(new Candy(candies[clickCandy].row,candies[clickCandy].column,candies[clickCandy].type+20,candyCount));
+                    candyCount++;
+                }
+                if (sameHorizontal == 5){
+                    candies.push(new Candy(candies[clickCandy].row,candies[clickCandy].column,candies[clickCandy].type+30,candyCount));
+                    candyCount++;
+                }
+            }else{
+                if (sameHorizontal == 4){
+                    candies.push(new Candy(candies[selectedCandy].row,candies[selectedCandy].column,candies[selectedCandy].type+20,candyCount));
+                    candyCount++;
+                }
+                if (sameHorizontal == 5){
+                    candies.push(new Candy(candies[selectedCandy].row,candies[selectedCandy].column,candies[selectedCandy].type+30,candyCount));
+                    candyCount++;
+                }
             }
+            
         }
     }
 }
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function checkUp(removeCandy){
-    for (var i = 0; i < 3; i++){
+    for (var i = 0; i < 4; i++){
         if(selectedCandyUp[i] != ""){
             if(candies[selectedCandy].type == candies[selectedCandyUp[i]].type){       
                 if(removeCandy){
@@ -296,7 +333,7 @@ function checkUp(removeCandy){
     }
 }
 function checkDown(removeCandy){
-    for (var i = 0; i < 3; i++){
+    for (var i = 0; i < 4; i++){
         if(selectedCandyDown[i] != ""){
             if(candies[selectedCandy].type == candies[selectedCandyDown[i]].type){       
                 if(removeCandy){
@@ -307,7 +344,7 @@ function checkDown(removeCandy){
     }
 }
 function checkLeft(removeCandy){
-    for (var i = 0; i < 3; i++){
+    for (var i = 0; i < 4; i++){
         if(selectedCandyLeft[i] != ""){
             //if(removeCandy){console.log("en el frame:"+frame+", vale:"+selectedCandyLeft[i])}
             if(candies[selectedCandy].type == candies[selectedCandyLeft[i]].type){
@@ -320,7 +357,7 @@ function checkLeft(removeCandy){
     }
 }
 function checkRight(removeCandy){
-    for (var i = 0; i < 3; i++){
+    for (var i = 0; i < 4; i++){
         if(selectedCandyRight[i] != ""){
             if(candies[selectedCandy].type == candies[selectedCandyRight[i]].type){
                 if(removeCandy){
@@ -333,16 +370,16 @@ function checkRight(removeCandy){
 
 function selectCandy(selectedRow,selectedColumn){
     selectedCandy = 0;
-    selectedCandyUp = ["","",""];
-    selectedCandyDown = ["","",""];
-    selectedCandyLeft = ["","",""];
-    selectedCandyRight = ["","",""];
+    selectedCandyUp = ["","","",""];
+    selectedCandyDown = ["","","",""];
+    selectedCandyLeft = ["","","",""];
+    selectedCandyRight = ["","","",""];
     for (var c in candies){
         if(candies[c].row == selectedRow){
             if (candies[c].column == selectedColumn){ // caramelo seleccionado
                 selectedCandy = c;
             }
-            for (var i=0; i<3; i++){
+            for (var i=0; i<4; i++){
                 if (candies[c].column == selectedColumn-(i+1)) { // caramelo seleccionado izquierda
                     selectedCandyLeft[i] = c;
                 }
@@ -352,7 +389,7 @@ function selectCandy(selectedRow,selectedColumn){
             }
         }
         if(candies[c].column == selectedColumn){ 
-            for (var i = 0; i < 3; i++){
+            for (var i = 0; i < 4; i++){
                 if(candies[c].row == selectedRow-(i+1)){ //caramelos seleccionados arriba
                     selectedCandyUp[i] = c;
                 }
@@ -367,4 +404,8 @@ function selectCandy(selectedRow,selectedColumn){
     console.log("selectedCandyDown = "+ selectedCandyDown);
     console.log("selectedCandyLeft = "+ selectedCandyLeft );
     console.log("selectedCandyRight = "+selectedCandyRight); */
+}
+
+function sortCandies(){
+    
 }

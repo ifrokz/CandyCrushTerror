@@ -1,6 +1,7 @@
 var fps = 30;
 var timer = "";
 var leftPriority = true;
+var firstClick = false;
 var frame = 0;
 
 $(document).ready(function(){
@@ -24,6 +25,7 @@ function loop(){
     drawGrid();
     updateTiles();
     updateCandies();
+    sortCandies();
     checkCandies();
     frame++;
     leftPriority = !leftPriority; // si leftPriority=true, caida en diagonal izquierda primero, si leftPriority=false, caida en diagonal derecha primero
