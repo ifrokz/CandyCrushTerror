@@ -2,6 +2,7 @@ var fps = 30;
 var timer = "";
 var leftPriority = true;
 var firstClick = false;
+var candiesSorted = false;
 var frame = 0;
 
 $(document).ready(function(){
