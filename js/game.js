@@ -1,6 +1,7 @@
 var fps = 30;
 var timer = "";
 var leftPriority = true;
+var frame = 0;
 
 $(document).ready(function(){
     clearData();
@@ -24,6 +25,7 @@ function loop(){
     updateTiles();
     updateCandies();
     checkCandies();
+    frame++;
     leftPriority = !leftPriority; // si leftPriority=true, caida en diagonal izquierda primero, si leftPriority=false, caida en diagonal derecha primero
     clearTimeout(timer);
     timer = setTimeout("loop()",1000/fps);

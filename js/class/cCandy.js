@@ -109,6 +109,7 @@ var clickCandyUp = "";
 var clickCandyDown = "";
 var clickCandyLeft = "";
 var clickCandyRight = "";
+var candiesToRemove = [];
 function clickCandies(){ // esta función nos servirá para cuando hagamos click en un caramelo, pillar su row y su column y filtrar en la base de datos para seleccionar ese caramelo
     $("#canvas").mousedown(function(event){ // de momento genera caramelos donde haces click
         //console.log("pageX:"+event.pageX + " | pageY:" + event.pageY);
@@ -201,64 +202,107 @@ function checkCandies(){
     for (var i = 0; i < candies.length; i++){ // busca L o T
         sameVertical = 1;
         sameHorizontal = 1;
+        removeCandy = false;
         selectCandy(candies[i].row, candies[i].column);
-        checkUp();
-        checkDown();
-        checkLeft();
-        checkRight();
+        checkUp(removeCandy);
+        checkDown(removeCandy);
+        checkLeft(removeCandy);
+        checkRight(removeCandy);
         if(sameVertical >= 3 && sameHorizontal >= 3){ // tenemos una L o T
             console.log("tenemos L o T en la fila:"+candies[selectedCandy].row+"//columna:"+candies[selectedCandy].column)
+            removeCandy = true;
+            candiesToRemove.push(selectedCandy);
+            checkUp(removeCandy);
+            checkDown(removeCandy);
+            checkLeft(removeCandy);
+            checkRight(removeCandy);
+            removeCandy = false;
+            for(var c in candiesToRemove){
+                candies.splice(candiesToRemove[c],1);
+            }
+            candiesToRemove=[];
+            return;
         }
     }
     for (var i = 0; i < candies.length; i++){ //busca combinaciones horizontales o verticales
         sameVertical = 1;
         sameHorizontal = 1;
+        removeCandy = false;
         selectCandy(candies[i].row, candies[i].column);
-        checkUp();
-        checkDown();
-        checkLeft();
-        checkRight();
+        checkUp(removeCandy);
+        checkDown(removeCandy);
+        checkLeft(removeCandy);
+        checkRight(removeCandy);
         if(sameVertical >= 3){ // tenemos combinacion vertical
             console.log("tenemos combinacion vertical");
+            removeCandy = true;
+            candiesToRemove.push(selectedCandy);
+            checkUp(removeCandy);
+            checkDown(removeCandy);
+            removeCandy = false;
+            for(var c in candiesToRemove){
+                candies.splice(candiesToRemove[c],1);
+            }
+            candiesToRemove=[];
+            return;
         }
         if(sameHorizontal >= 3){ // tenemos combinación horizontal
             console.log("tenemos combinacion horizontal");
+            removeCandy = true;
+            candiesToRemove.push(selectedCandy);
+            checkLeft(removeCandy);
+            checkRight(removeCandy);
+            removeCandy = false;
+            for(var c in candiesToRemove){
+                candies.splice(candiesToRemove[c],1);
+            }
+            candiesToRemove=[];
         }
     }
 }
 
-function checkUp(){
+function checkUp(removeCandy){
     for (var i = 0; i < 3; i++){
         if(selectedCandyUp[i] != ""){
-            if(candies[selectedCandy].type == candies[selectedCandyUp[i]].type){
-                sameVertical++;
+            if(candies[selectedCandy].type == candies[selectedCandyUp[i]].type){       
+                if(removeCandy){
+                    candiesToRemove.push(selectedCandyUp[i]);
+                }else{sameVertical++;}
             }else{return}
         }else{return}
     }
 }
-function checkDown(){
+function checkDown(removeCandy){
     for (var i = 0; i < 3; i++){
         if(selectedCandyDown[i] != ""){
-            if(candies[selectedCandy].type == candies[selectedCandyDown[i]].type){
-                sameVertical++;
+            if(candies[selectedCandy].type == candies[selectedCandyDown[i]].type){       
+                if(removeCandy){
+                    candiesToRemove.push(selectedCandyDown[i]);
+                }else{sameVertical++;}
             }else{return}
         }else{return}
     }
 }
-function checkLeft(){
+function checkLeft(removeCandy){
     for (var i = 0; i < 3; i++){
         if(selectedCandyLeft[i] != ""){
+            if(removeCandy){console.log("en el frame:"+frame+", vale:"+selectedCandyLeft[i])}
             if(candies[selectedCandy].type == candies[selectedCandyLeft[i]].type){
-                sameHorizontal++;
+                if(removeCandy){
+                    console.log("en el frame:"+frame+", vale:"+selectedCandyLeft[i])
+                    candiesToRemove.push(selectedCandyLeft[i]);
+                }else{sameHorizontal++;}
             }else{return}
         }else{return}
     }
 }
-function checkRight(){
+function checkRight(removeCandy){
     for (var i = 0; i < 3; i++){
         if(selectedCandyRight[i] != ""){
             if(candies[selectedCandy].type == candies[selectedCandyRight[i]].type){
-                sameHorizontal++;
+                if(removeCandy){
+                    candiesToRemove.push(selectedCandyRight[i]);
+                }else{sameHorizontal++;}
             }else{return}
         }else{return}
     }
