@@ -28,7 +28,7 @@ function loop(){
     drawGrid();
     //updateTiles();
     updateCandies();
-    sortCandies();
+    //sortCandies();
     if(leftPriority){
         checkCandies();
     }
