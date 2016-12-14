@@ -70,7 +70,7 @@ function hideLevelCanvas(){
 function showLevelCanvas(){
     $(".level").show();
 }
-function reScanLevelCanvas(){
+function reScanLevelCanvas(){ // esta es la función que hay que cambiar. Es la que hace los push de los caramelos, que me comentaste que no encontrabas dónde se hacía
     showLevelCanvas();
     for(var i = 0; i < pixelsArray.length; i += 4){
         if(pixelsArray[i] < 10 && 

@@ -69,27 +69,27 @@ function updateCandies(){
     }
 }
 
-var selectedCandy = "";
-var selectedCandyUp = ["","","","","","","","","",""];
-var selectedCandyDown = ["","","",""];
-var selectedCandyLeft = ["","","",""];
-var selectedCandyRight = ["","","",""];
-var clickCandy = 0;
+var selectedCandy = ""; // selected candy es para barrer todos los caramelos
+var selectedCandyUp = ["","","","","","","","","",""]; // guardo los 10 caramelos de arriba
+var selectedCandyDown = ["","","",""];  // guardo los 4 caramelos de abajo
+var selectedCandyLeft = ["","","",""];  // eso...
+var selectedCandyRight = ["","","",""]; 
+var clickCandy = 0; // click candy es para el caramelo que has hecho click (así sabemos donde hay que colocar el caramelo especial en caso de que proceda)
 var clickCandyUp = "";
 var clickCandyDown = "";
 var clickCandyLeft = "";
 var clickCandyRight = "";
-var candiesToRemove = [];
-function clickCandies(){ // esta función nos servirá para cuando hagamos click en un caramelo, pillar su row y su column y filtrar en la base de datos para seleccionar ese caramelo
-    $("#canvas").mousedown(function(event){ // de momento genera caramelos donde haces click
-        if(!cannotMove){
-            firstClick = true;
+var candiesToRemove = []; // aquí guardo los indices de los caramelos que se van a eliminar (para la animación antes de que se eliminen)
+function clickCandies(){ 
+    $("#canvas").mousedown(function(event){ 
+        if(!cannotMove){ //cannotMove es para impedir movimientos mientras hay caramelos eliminandose
+            firstClick = true; // los caramelos especiales aparecen donde has hecho click, pero si la partida aun no ha empezado (como no has hecho click) el caramelo especial aparecería en la fila 1-1. Además si hay un combo, y la combinacion >3 aparece después de la primera, tampoco debe aparecer donde has hecho click
             //console.log("pageX:"+event.pageX + " | pageY:" + event.pageY);
             if(event.pageX > 40 && event.pageX < 1040 && event.pageY > 10 + 3 * 100 && event.pageY < 1910 - 5 * 100){
                 //console.log("fila:" + (Math.floor( ( event.pageY - 10 ) / 100 ) - 3)+"//columna:"+ Math.floor( ( event.pageX - 40 ) / 100));
                 var tempRow = (Math.floor( ( event.pageY - 10 ) / 100 ) - 3); //fila donde has hecho click
                 var tempColumn =(Math.floor( ( event.pageX - 40 ) / 100));   //columna donde has hecho click
-                for (var c in candies){
+                for (var c in candies){ //todo este bucle for es para seleccionar los índices de los caramelos adyacentes al que has hecho click
                     if(candies[c].row == tempRow){
                         if (candies[c].column == tempColumn){ // caramelo seleccionado
                             clickCandy = c;
@@ -120,36 +120,36 @@ function clickCandies(){ // esta función nos servirá para cuando hagamos click
     $("#canvas").swipe( {
         swipe: function (event, direction, distance, duration, fingerCount, fingerData) {
             //console.log(direction);
-            if(!cannotMove){
+            if(!cannotMove){ // solo puedes hacer swipe mientras no haya animación de eliminación de caramelos
                 switch(direction){
                     case "left":
-                        if(clickCandyLeft == ""){}else{
+                        if(clickCandyLeft === ""){}else{
                             candies[clickCandy].column -= 1;
                             candies[clickCandyLeft].column += 1;
                         }
 
                         break;
                     case "right":
-                        if(clickCandyRight == ""){}else{
+                        if(clickCandyRight === ""){}else{
                             candies[clickCandy].column += 1;
                             candies[clickCandyRight].column -= 1;
                         }
 
                         break;
                     case "up":
-                        if(clickCandyUp == ""){}else{
+                        if(clickCandyUp === ""){}else{
                             candies[clickCandy].row -= 1;
                             candies[clickCandyUp].row += 1;
                         }
                         break;
                     case "down":
-                        if(clickCandyDown == ""){}else{
+                        if(clickCandyDown === ""){}else{
                             candies[clickCandy].row += 1;
                             candies[clickCandyDown].row -= 1;
                         }
                         break;
                 }
-                clickCandyUp = "";
+                clickCandyUp = ""; // resetea los valores de los índices del caramelo donde has hecho click y sus adyacentes
                 clickCandyDown = "";
                 clickCandyLeft = "";
                 clickCandyRight = "";
@@ -163,78 +163,77 @@ function clickCandies(){ // esta función nos servirá para cuando hagamos click
 
 
 
-function spawnCandies(row,column){
+function spawnCandies(row,column){ // funciones auxiliares para ahorrarnos lineas luego, no debería ir aquí, soy to desordenao
     candies.push(new Candy(row, column, Math.ceil( Math.random() * 6 ), candyCount ) );
     addCandyToDatabase(row, column, candyCount);
     candyCount++;
 }
 
-function removeCandies(row,column){
+function removeCandies(row,column){ // era para trabajar con database, ignoralo xDD
     removeCandyFromDatabase(row,column);
 }
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 function checkCandies(){
     for (var c in candies){
-        if(candies[c].remove == true){
-            cannotMove = true;
-            candies[c].width -= 5;
-            candies[c].height -= 5;
-            if(candies[c].width < 10){
-                selectCandy(candies[c].row,candies[c].column);
+        if(candies[c].remove === true){ // si el caramelo ha sido asignado para ser eliminado
+            cannotMove = true;  // impide que haya movimientos
+            candies[c].width -= 5;  // disminuye el tamaño de la imagen
+            candies[c].height -= 5; //eso
+            if(candies[c].width < 10){  // si el tamaño es menor de 10px
+                selectCandy(candies[c].row,candies[c].column); // selecciona al caramelo y sus adyacentes para bajar una posicion a todos los de arriba
                 for (var s in selectedCandyUp){
-                    if(selectedCandyUp[s] != ""){
+                    if(selectedCandyUp[s] !== ""){
                         if(selectedQuantity == 1){
                             candies[selectedCandyUp[s]].row ++;
                         }
                     }
                 }
-                candies.splice(c,1);
-                firstClick = false;
-                cannotMove = false;
+                candies.splice(c,1); // elimina al caramelo
+                firstClick = false; // por si hay combos, que fristclick true sea solo para la primera eliminación
+                cannotMove = false; // en el caso de que esta eliminación sea la última, ya te puedes mover, sino volverá a ser true al proximo caramelo que encuentre que se esté eliminando
             }
         }
-        candiesSorted = false;
     }
     for (var i = 0; i < candies.length; i++){ // busca L o T
-        sameVertical = 1;
-        sameHorizontal = 1;
-        removeCandy = false;
-        selectCandy(candies[i].row, candies[i].column);
-        checkUp(removeCandy);
+        sameVertical = 1; // variable que se incremente cada vez que hay un adyacente vertical del mismo tipo
+        sameHorizontal = 1; // variable que se incremente cada vez que hay un adyacente horizontal del mismo tipo
+        removeCandy = false; // las funciones checkdown(), checkup(), checkleft(), checkright() lo utilizan como argumento y si es true hace operaciones adicionales. Por defecto la primera vez se llama a esas funciones con removeCandy=false
+        selectCandy(candies[i].row, candies[i].column); // selecciona el caramelo y sus adyacentes
+        checkUp(removeCandy); // haz las funciones check con removecandy = false, siendo false, lo que hace es aumentar sameHorizontal y samevertical en caso de encontrar un caramelo igual
         checkDown(removeCandy);
         checkLeft(removeCandy);
         checkRight(removeCandy);
-        if(sameVertical >= 3 && sameHorizontal >= 3){ // tenemos una L o T
+        if(sameVertical >= 3 && sameHorizontal >= 3){ // tenemos una L o T, por lo tanto se volveran a hacer las funciones checkup() y compañía con el argumento removeCandy = true
             console.log("tenemos L o T en la fila:"+candies[selectedCandy].row+"//columna:"+candies[selectedCandy].column)
             removeCandy = true;
-            candiesToRemove.push(selectedCandy);
-            checkUp(removeCandy);
+            candiesToRemove.push(selectedCandy); // el selected candy es seleccionado para ser eliminado this.remove = true, bueno, en verdad meto el índice en la matriz candiestoremove que va a contener los caramelos que van a cambiar su propiedad a this.remove = true
+            checkUp(removeCandy); // si removecandy = true, ahora lo que hace la función es seleccionar a los caramelos que son iguales para ser eliminados (this.remove = true)
             checkDown(removeCandy);
             checkLeft(removeCandy);
             checkRight(removeCandy);
-            removeCandy = false;
+            removeCandy = false; // vuelva a poner remove candy como false para que vuelva a funcionar de la otra forma las funciones check
             for(var c in candiesToRemove){
-                candies[candiesToRemove[c]].remove = true;
+                candies[candiesToRemove[c]].remove = true; // pues eso, los caramelos anteriormente seleccionados seran etiquetados como this.remove = true y en el siguiente bucle empezarán a empequeñecer
             }
-            candiesToRemove=[];
-            if(firstClick){
+            candiesToRemove=[]; // una vez que hayas cambiado la propiedad a true, vacia la matriz para las siguientes comprobaciones
+            if(firstClick){ // aquí se mete el caramelo especial, lo hace de una manera o de otra en función de si firstclick = true o false
                 candies.push(new Candy(candies[clickCandy].row,candies[clickCandy].column,candies[selectedCandy].type+30,candyCount));
                 candyCount++;
             }else{
                 candies.push(new Candy(candies[selectedCandy].row,candies[selectedCandy].column,candies[selectedCandy].type+30,candyCount));
                 candyCount++;
             }
-            return;
+            return; // en caso de que haya habido una combinación en T o en L, no sigas comprobando en este frame
         }
     }
-    for (var i = 0; i < candies.length; i++){ //busca combinaciones horizontales o verticales
-        sameVertical = 1;
+    for (var i = 0; i < candies.length; i++){ //busca combinaciones horizontales o verticales en caso de que no haya habido ninguna L o T
+        sameVertical = 1; // todo lo de aquí tiene estructura similar a los de L o T
         sameHorizontal = 1;
         removeCandy = false;
         selectCandy(candies[i].row, candies[i].column);
         checkUp(removeCandy);
-        checkDown(removeCandy);
+        checkDown(removeCandy); // haz los check incrementando sameHorizontal y sameVertical
         checkLeft(removeCandy);
         checkRight(removeCandy);
         if(sameVertical >= 3){ // tenemos combinacion vertical
@@ -249,20 +248,20 @@ function checkCandies(){
             }
             candiesToRemove=[];
             if (firstClick){
-                if (sameVertical == 4){
+                if (sameVertical === 4){ // si 
                     candies.push(new Candy(candies[clickCandy].row,candies[clickCandy].column,candies[clickCandy].type+10,candyCount));
                     candyCount++;
                 }
-                if (sameVertical == 5){
+                if (sameVertical === 5){
                     candies.push(new Candy(candies[clickCandy].row,candies[clickCandy].column,40,candyCount));
                     candyCount++;
                 }
             }else{
-                if (sameVertical == 4){
+                if (sameVertical === 4){
                     candies.push(new Candy(candies[selectedCandy].row,candies[selectedCandy].column,candies[selectedCandy].type+10,candyCount));
                     candyCount++;
                 }
-                if (sameVertical == 5){
+                if (sameVertical === 5){
                     candies.push(new Candy(candies[selectedCandy].row,candies[selectedCandy].column,40,candyCount));
                     candyCount++;
                 }
@@ -282,20 +281,20 @@ function checkCandies(){
             }
             candiesToRemove=[];
             if(firstClick){
-                if (sameHorizontal == 4){
+                if (sameHorizontal === 4){
                     candies.push(new Candy(candies[clickCandy].row,candies[clickCandy].column,candies[clickCandy].type+20,candyCount));
                     candyCount++;
                 }
-                if (sameHorizontal == 5){
+                if (sameHorizontal === 5){
                     candies.push(new Candy(candies[clickCandy].row,candies[clickCandy].column,40,candyCount));
                     candyCount++;
                 }
             }else{
-                if (sameHorizontal == 4){
+                if (sameHorizontal === 4){
                     candies.push(new Candy(candies[selectedCandy].row,candies[selectedCandy].column,candies[selectedCandy].type+20,candyCount));
                     candyCount++;
                 }
-                if (sameHorizontal == 5){
+                if (sameHorizontal === 5){
                     candies.push(new Candy(candies[selectedCandy].row,candies[selectedCandy].column,40,candyCount));
                     candyCount++;
                 }
@@ -307,18 +306,18 @@ function checkCandies(){
 
 function checkUp(removeCandy){
     for (var i = 0; i < 10; i++){
-        if(selectedCandyUp[i] != ""){
-            if(candies[selectedCandy].type == candies[selectedCandyUp[i]].type){       
-                if(removeCandy){
+        if(selectedCandyUp[i] !== ""){
+            if(candies[selectedCandy].type == candies[selectedCandyUp[i]].type){       // si los caramelos son del mismo tipo
+                if(removeCandy){ // este if se ejecuta si removecandy == true
                     candiesToRemove.push(selectedCandyUp[i]);
-                }else{sameVertical++;}
-            }else{return}
-        }else{return}
+                }else{sameVertical++;}  // esto se ejecuta si removecandy == false
+            }else{return} // al primer caramelo que no sea igual que el primero, deja de comparar
+        }else{return} // al primer caramelo que intente comparar que no exista, deja de comparar
     }
 }
-function checkDown(removeCandy){
+function checkDown(removeCandy){ // lo mismo que checkup pero para abajo
     for (var i = 0; i < 4; i++){
-        if(selectedCandyDown[i] != ""){
+        if(selectedCandyDown[i] !== ""){
             if(candies[selectedCandy].type == candies[selectedCandyDown[i]].type){       
                 if(removeCandy){
                     candiesToRemove.push(selectedCandyDown[i]);
@@ -327,9 +326,9 @@ function checkDown(removeCandy){
         }else{return}
     }
 }
-function checkLeft(removeCandy){
+function checkLeft(removeCandy){// lo mismo que checkup pero para left
     for (var i = 0; i < 4; i++){
-        if(selectedCandyLeft[i] != ""){
+        if(selectedCandyLeft[i] !== ""){
             //if(removeCandy){console.log("en el frame:"+frame+", vale:"+selectedCandyLeft[i])}
             if(candies[selectedCandy].type == candies[selectedCandyLeft[i]].type){
                 if(removeCandy){
@@ -340,9 +339,9 @@ function checkLeft(removeCandy){
         }else{return}
     }
 }
-function checkRight(removeCandy){
+function checkRight(removeCandy){// lo mismo que checkup pero para right
     for (var i = 0; i < 4; i++){
-        if(selectedCandyRight[i] != ""){
+        if(selectedCandyRight[i] !== ""){
             if(candies[selectedCandy].type == candies[selectedCandyRight[i]].type){
                 if(removeCandy){
                     candiesToRemove.push(selectedCandyRight[i]);
@@ -397,7 +396,5 @@ function selectCandy(selectedRow,selectedColumn){
     console.log("selectedCandyLeft = "+ selectedCandyLeft );
     console.log("selectedCandyRight = "+selectedCandyRight); */
 }
-function sortCandies(){
 
-}
 
