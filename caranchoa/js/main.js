@@ -4,11 +4,15 @@ $(document).ready(function(){
 
 function start(){
     loop();
+    $("#lienzo").attr("height",windowHeight);
+    $("#lienzo").attr("width",windowWidth);
 }
 
 function loop(){
     ctx.clearRect(0,0,windowWidth,windowHeight)
-
+    
+    ctx.drawImage(anchoaBg,0,0,windowWidth,windowHeight);
+    
     if(pause){
         ctx.drawImage(playImg,pausePosX,pausePosY,buttonWidth,buttonHeight);
     }else{
@@ -25,7 +29,7 @@ function loop(){
         }
         ctx.drawImage(pauseImg,pausePosX,pausePosY,buttonWidth,buttonHeight);
     }
-    if(torta || animacionTortazo<=5){
+    if(torta || animacionTortazo<=2){
         if(ladoTortazo == 1){
             ctx.drawImage(bombaImg[1],0,0,windowWidth,windowHeight);
         }else{
@@ -38,10 +42,11 @@ function loop(){
     torta = false;
 
     ctx.textAlign="center"; 
+    ctx.fillStyle="red";
 
     var texto = "Segundos restantes: "+Math.floor(segundosSeleccionados-segundosTranscurridos/fps);
-    var fontPx = 10;
-    ctx.font= fontPx+"px Arial";
+    var fontPx = 15;
+    ctx.font= fontPx+"px Comic Sans MS";
     ctx.fillText(texto,windowWidth/2,fontPx*2); 
     texto = "Le has pegado "+tortasPorSegundo+"/s";
     ctx.fillText(texto,windowWidth/2,fontPx*4); 

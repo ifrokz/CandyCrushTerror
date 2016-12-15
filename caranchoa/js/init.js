@@ -56,6 +56,8 @@ bombaImg[1].src ="img/pj/1.png";
 bombaImg[2] = new Image();
 bombaImg[2].src ="img/pj/2.png";
 
+anchoaBg = new Image();
+anchoaBg.src="img/bg.png";
 // EXPLOSION
 
 var explosion = new Image();
