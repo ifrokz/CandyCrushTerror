@@ -45,7 +45,8 @@ var pausePosY = 0;
 
 // Granbomba
 torta = false;
-
+var animacionTortazo = 100;
+ladoTortazo = 0;
 var bombaImg = [];
 
 bombaImg[0] = new Image();

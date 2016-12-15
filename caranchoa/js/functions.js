@@ -19,6 +19,8 @@ $("#lienzo").on("touchstart",function(e){
             $("#buffer").html("");
             $("#buffer").append("<audio src='sound/tortazo.wav' autoplay>");
             torta = true;
+            animacionTortazo = 0;
+            ladoTortazo = Math.floor(Math.random()*2);
             ctx.drawImage(explosion,touchX-explosionWidth/2,touchY-explosionWidth/2,explosionWidth,explosionWidth);
         }
     }

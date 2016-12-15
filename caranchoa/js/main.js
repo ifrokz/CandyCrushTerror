@@ -25,8 +25,8 @@ function loop(){
         }
         ctx.drawImage(pauseImg,pausePosX,pausePosY,buttonWidth,buttonHeight);
     }
-    if(torta){
-        if(Math.floor(Math.random()*2) == 1){
+    if(torta || animacionTortazo<=5){
+        if(ladoTortazo == 1){
             ctx.drawImage(bombaImg[1],0,0,windowWidth,windowHeight);
         }else{
             ctx.drawImage(bombaImg[2],0,0,windowWidth,windowHeight);
@@ -46,6 +46,7 @@ function loop(){
     texto = "Le has pegado "+tortasPorSegundo+"/s";
     ctx.fillText(texto,windowWidth/2,fontPx*4); 
 
+    animacionTortazo++;
     clearTimeout(temp);
     temp = setTimeout("loop();",1000/fps);
 }
