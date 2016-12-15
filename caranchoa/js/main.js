@@ -26,7 +26,11 @@ function loop(){
         ctx.drawImage(pauseImg,pausePosX,pausePosY,buttonWidth,buttonHeight);
     }
     if(torta){
-        ctx.drawImage(bombaImg[1],0,0,windowWidth,windowHeight);
+        if(Math.floor(Math.random()*2) == 1){
+            ctx.drawImage(bombaImg[1],0,0,windowWidth,windowHeight);
+        }else{
+            ctx.drawImage(bombaImg[2],0,0,windowWidth,windowHeight);
+        }
     }else{
         ctx.drawImage(bombaImg[0],0,0,windowWidth,windowHeight);
     }

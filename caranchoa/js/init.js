@@ -49,9 +49,11 @@ torta = false;
 var bombaImg = [];
 
 bombaImg[0] = new Image();
-bombaImg[0].src ="img/pj/1.png";
+bombaImg[0].src ="img/pj/0.png";
 bombaImg[1] = new Image();
-bombaImg[1].src ="img/pj/2.png";
+bombaImg[1].src ="img/pj/1.png";
+bombaImg[2] = new Image();
+bombaImg[2].src ="img/pj/2.png";
 
 // EXPLOSION
 
